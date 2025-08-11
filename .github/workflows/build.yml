@@ -10,22 +10,5 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential cmake libgtest-dev
-      - name: Configure CMake
-        run: |
-          mkdir build
-          cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug ..
-      - name: Build and Run Tests
-        run: |
-          cd build
-          cmake --build .
-          ctest --output-on-failure
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: build/Testing/Temporary/LastTest.log
+      - name: Install Google Test
+        uses: ./.github/gtest/action.yml
